@@ -1,16 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import {ChildrenEntity} from "./children.entity";
-import {Repository} from "typeorm";
 import { InjectRepository} from "@nestjs/typeorm"
+import {TypeOrmCrudService} from "@nestjsx/crud-typeorm";
 
 @Injectable()
-export class ChildrenService {
-    constructor(@InjectRepository(ChildrenEntity) private readonly childrenRepository : Repository<ChildrenEntity>) {
+export class ChildrenService extends TypeOrmCrudService<ChildrenEntity>{
+    constructor(@InjectRepository(ChildrenEntity) repo) {
+        super(repo)
     }
-
-    findAll(): Promise<ChildrenEntity[]>{
-        return this.childrenRepository.find()
-    }
-
-
 }
