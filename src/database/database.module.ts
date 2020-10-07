@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm'
 import {ChildrenEntity} from "../modules/children/children.entity";
+import {SchoolEntity} from "../modules/school/school.entity";
+import {StopEntity} from "../modules/stop/stop.entity";
 
 @Module({
     imports: [TypeOrmModule.forRoot({
@@ -10,7 +12,7 @@ import {ChildrenEntity} from "../modules/children/children.entity";
         username:'postgres',
         password:'root',
         database:'project-bus',
-        entities:[ChildrenEntity],
+        entities:[ChildrenEntity,SchoolEntity,StopEntity],
         synchronize:true
     })]
 })
