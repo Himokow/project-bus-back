@@ -8,6 +8,6 @@ export class StopEntity {
     @Column()
     name: string;
 
-    @Column()
+    @Column({default:''})
     address: string;
 }

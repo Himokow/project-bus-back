@@ -1,6 +1,7 @@
 import { Controller } from '@nestjs/common';
-import {Crud} from "@nestjsx/crud";
+import {Crud, CrudController} from "@nestjsx/crud";
 import {ChildrenEntity} from "./children.entity";
+import {ChildrenService} from "./children.service";
 
 
 @Crud({
@@ -17,4 +18,7 @@ import {ChildrenEntity} from "./children.entity";
 })
 
 @Controller('children')
-export class ChildrenController {}
+export class ChildrenController implements CrudController<ChildrenEntity>{
+    constructor(public service:ChildrenService) {
+    }
+}

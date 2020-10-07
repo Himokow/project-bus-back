@@ -1,6 +1,7 @@
 import { Controller } from '@nestjs/common';
-import {Crud} from "@nestjsx/crud";
+import {Crud, CrudController} from "@nestjsx/crud";
 import {StopEntity} from "./stop.entity";
+import {StopService} from "./stop.service";
 
 @Crud({
     model:{
@@ -16,4 +17,8 @@ import {StopEntity} from "./stop.entity";
 })
 
 @Controller('stop')
-export class StopController {}
+export class StopController implements CrudController<StopEntity>{
+    constructor(public service:StopService) {
+    }
+}
+

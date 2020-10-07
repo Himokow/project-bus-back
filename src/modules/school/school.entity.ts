@@ -8,6 +8,6 @@ export class SchoolEntity {
     @Column()
     name: string;
 
-    @Column()
+    @Column({default:''})
     address: string;
 }
