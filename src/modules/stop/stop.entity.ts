@@ -1,4 +1,5 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinColumn} from "typeorm";
+import {Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinColumn, OneToMany} from "typeorm";
+import {ChildrenEntity} from "../children/children.entity";
 
 @Entity()
 export class StopEntity {
@@ -10,4 +11,7 @@ export class StopEntity {
 
     @Column({default:''})
     address: string;
+
+    @OneToMany(type => ChildrenEntity, child => child.stop)
+    children : ChildrenEntity[]
 }
