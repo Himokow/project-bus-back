@@ -1,6 +1,7 @@
-import { Controller } from '@nestjs/common';
-import {Crud} from "@nestjsx/crud";
+import {Body, Controller, Get, Post} from '@nestjs/common';
+import {Crud, CrudController, Override} from "@nestjsx/crud";
 import {ChildrenEntity} from "./children.entity";
+import {ChildrenService} from "./children.service";
 
 
 @Crud({
@@ -12,9 +13,18 @@ import {ChildrenEntity} from "./children.entity";
             field: 'id',
             type: 'uuid',
             primary: true
-        }
-    }
+        },
+    },
 })
 
 @Controller('children')
-export class ChildrenController {}
+export class ChildrenController implements CrudController<ChildrenEntity>{
+    constructor(public service:ChildrenService) {
+    }
+
+    @Override()
+    @Get()
+    async getAllChildrenWithRelations():Promise<any[]>{
+        return await this.service.findAll();
+    }
+}
