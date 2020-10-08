@@ -2,6 +2,7 @@ import {Body, Controller, Get, Post} from '@nestjs/common';
 import {Crud, CrudController, Override} from "@nestjsx/crud";
 import {ChildrenEntity} from "./children.entity";
 import {ChildrenService} from "./children.service";
+import {UpdateResult} from "typeorm";
 
 
 @Crud({
@@ -26,5 +27,16 @@ export class ChildrenController implements CrudController<ChildrenEntity>{
     @Get()
     async getAllChildrenWithRelations():Promise<any[]>{
         return await this.service.findAll();
+    }
+
+    @Override()
+    @Post()
+    async addChild(@Body()c : ChildrenEntity):Promise<any[]>{
+        return await this.service.addChild(c);
+    }
+
+    @Get('/uncheck')
+    async uncheckallChildren():Promise<any[]>{
+        return await this.service.uncheckAll();
     }
 }

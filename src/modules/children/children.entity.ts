@@ -27,4 +27,7 @@ export class ChildrenEntity {
     @Column({default:false})
     back:boolean;
 
+    @Column({default:false})
+    present:boolean;
+
 }
