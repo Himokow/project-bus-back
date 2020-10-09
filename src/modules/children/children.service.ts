@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import {ChildrenEntity} from "./children.entity";
 import { InjectRepository} from "@nestjs/typeorm"
 import {TypeOrmCrudService} from "@nestjsx/crud-typeorm";
-import {Repository} from "typeorm";
+import {getConnection, Repository, UpdateResult} from "typeorm";
 
 @Injectable()
 export class ChildrenService extends TypeOrmCrudService<ChildrenEntity>{
@@ -20,5 +20,22 @@ export class ChildrenService extends TypeOrmCrudService<ChildrenEntity>{
         } catch (e){
             return e
         }
+    }
+
+    async addChild(c):Promise<ChildrenEntity[]>{
+            return this.repo.save(c).then(async() => {
+                return await this.findAll()
+            })
+    }
+
+    async uncheckAll():Promise<ChildrenEntity[]>{
+            return this.repo
+            .createQueryBuilder()
+            .update(ChildrenEntity)
+            .set({back:false,present:false})
+            .execute()
+                .then(async()  =>  {
+                    return await this.findAll()
+                })
     }
 }

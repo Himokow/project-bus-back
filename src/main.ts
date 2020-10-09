@@ -5,6 +5,8 @@ import { Logger } from '@nestjs/common';
 
 const port = 3001;
 async function bootstrap() {
+
+  console.log(process.env.PORT)
   const app = await NestFactory.create(AppModule);
 
   const options = new DocumentBuilder()
@@ -17,7 +19,7 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   await app.enableCors();
-  await app.listen(port);
+  await app.listen(process.env.PORT || 3000);
   Logger.log(`🚀 Server running on http://localhost:${port}`, 'Bootstrap');
 
 }

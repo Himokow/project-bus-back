@@ -7,11 +7,7 @@ import {StopEntity} from "../modules/stop/stop.entity";
 @Module({
     imports: [TypeOrmModule.forRoot({
         type:'postgres',
-        host:'localhost',
-        port: 5432,
-        username:'postgres',
-        password:'root',
-        database:'project-bus',
+        url:process.env.DATABASE_URL ||  'postgres://postgres:root@localhost:5432/project-bus',
         entities:[ChildrenEntity,SchoolEntity,StopEntity],
         synchronize:true
     })]
