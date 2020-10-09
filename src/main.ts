@@ -5,6 +5,8 @@ import { Logger } from '@nestjs/common';
 
 const port = 3001;
 async function bootstrap() {
+
+  console.log(process.env.DB_USERNAME)
   const app = await NestFactory.create(AppModule);
 
   const options = new DocumentBuilder()
