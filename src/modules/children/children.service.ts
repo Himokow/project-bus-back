@@ -16,6 +16,7 @@ export class ChildrenService extends TypeOrmCrudService<ChildrenEntity>{
                 .createQueryBuilder('c')
                 .leftJoinAndSelect('c.school','school')
                 .leftJoinAndSelect('c.stop','stop')
+                .orderBy('c.lastName','ASC')
                 .getMany()
         } catch (e){
             return e
