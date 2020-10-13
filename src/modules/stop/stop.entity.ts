@@ -12,6 +12,6 @@ export class StopEntity {
     @Column({default:''})
     address: string;
 
-    @OneToMany(type => ChildrenEntity, child => child.stop)
+    @OneToMany(type => ChildrenEntity, child => child.stop ,{onDelete:'CASCADE'})
     children : ChildrenEntity[]
 }

@@ -12,6 +12,6 @@ export class SchoolEntity {
     @Column({default:''})
     address: string;
 
-    @OneToMany(type => ChildrenEntity, child => child.school)
+    @OneToMany(type => ChildrenEntity, child => child.school, {onDelete:'CASCADE'})
      children : ChildrenEntity[]
 }
