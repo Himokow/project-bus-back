@@ -12,6 +12,9 @@ export class SchoolEntity {
     @Column({default:''})
     address: string;
 
+    @Column({default:'#fff'})
+    color:string;
+
     @OneToMany(type => ChildrenEntity, child => child.school, {onDelete:'CASCADE'})
      children : ChildrenEntity[]
 }
