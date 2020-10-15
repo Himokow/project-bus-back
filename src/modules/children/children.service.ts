@@ -29,6 +29,18 @@ export class ChildrenService extends TypeOrmCrudService<ChildrenEntity>{
             })
     }
 
+    async updateChild(c):Promise<ChildrenEntity[]>{
+        return this.repo
+            .createQueryBuilder()
+            .update()
+            .set(c)
+            .where("id = :id",{id:c.id})
+            .execute()
+            .then(async()  =>  {
+                return await this.findAll()
+            })
+    }
+
     async uncheckAll():Promise<ChildrenEntity[]>{
             return this.repo
             .createQueryBuilder()

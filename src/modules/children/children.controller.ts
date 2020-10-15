@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Post} from '@nestjs/common';
+import {Body, Controller, Get, Post, Put} from '@nestjs/common';
 import {Crud, CrudController, Override} from "@nestjsx/crud";
 import {ChildrenEntity} from "./children.entity";
 import {ChildrenService} from "./children.service";
@@ -33,6 +33,12 @@ export class ChildrenController implements CrudController<ChildrenEntity>{
     @Post()
     async addChild(@Body()c : ChildrenEntity):Promise<any[]>{
         return await this.service.addChild(c);
+    }
+
+    @Override()
+    @Put()
+    async updateChild(@Body()c:ChildrenEntity):Promise<any>{
+        return await this.service.updateChild(c);
     }
 
     @Get('/uncheck')
