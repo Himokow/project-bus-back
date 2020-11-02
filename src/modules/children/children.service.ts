@@ -17,6 +17,7 @@ export class ChildrenService extends TypeOrmCrudService<ChildrenEntity>{
                 .leftJoinAndSelect('c.school','school')
                 .leftJoinAndSelect('c.stop','stop')
                 .orderBy('c.lastName','ASC')
+                .addOrderBy('c.firstName','ASC')
                 .getMany()
         } catch (e){
             return e
