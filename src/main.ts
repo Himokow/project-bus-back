@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import {DocumentBuilder, SwaggerModule} from "@nestjs/swagger";
 import { Logger } from '@nestjs/common';
+const cors = require('cors');
 
 const port = 3001;
 async function bootstrap() {
@@ -18,12 +19,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
 
-  app.enableCors();
-  app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*"),
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept"),
-  next(),
-}),
+  app.use(cors());
   await app.listen(process.env.PORT || 3000);
   Logger.log(`🚀 Server running on http://localhost:${port}`, 'Bootstrap');
 
